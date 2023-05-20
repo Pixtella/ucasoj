@@ -2,6 +2,12 @@ from flask import Flask
 from flask import render_template
 from flask import request
 
+import datetime
+
+commonArgs = {}
+def refreshCommonArgs():
+    commonArgs["year"] = datetime.datetime.now().year
+
 app = Flask(__name__)
 
 # @app.route("/")
@@ -11,8 +17,19 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
-    return render_template("home.html")
+    refreshCommonArgs()
+    args = commonArgs.copy()
+    args["height"] = str(max(1000, 0)) + "px"
+    return render_template("home.html", **args)
     # return '<h1>Home</h1>'
+
+@app.route('/contests', methods=['GET', 'POST'])
+def contests():
+    refreshCommonArgs()
+    args = commonArgs.copy()
+    args["height"] = str(max(1000, 0)) + "px"
+    return render_template("contests.html", **args)
+
 
 @app.route('/signin', methods=['GET'])
 def signin_form():
@@ -30,5 +47,8 @@ def signin():
         return '<h3>Hello, admin!</h3>'
     return '<h3>Bad username or password.</h3>'
 
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    return render_template("loginpage.html")
 if __name__ == '__main__':
     app.run()
