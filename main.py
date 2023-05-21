@@ -1,12 +1,14 @@
 from flask import Flask
-from flask import render_template
+from flask import render_template,send_file
 from flask import request
 
 import datetime
 
-from contests import Contest,upcomingContestsInfo,contestHistoryInfo
+from contest import *
 
 commonArgs = {}
+
+
 def refreshCommonArgs():
     commonArgs["year"] = datetime.datetime.now().year
 
@@ -33,6 +35,25 @@ def contests():
     args["historicContests"] = contestHistoryInfo()
 
     return render_template("contests.html", **args)
+
+@app.route('/contest/<contestid>')
+def contest(contestid):
+    refreshCommonArgs()
+    args = commonArgs.copy()
+    curcontest = retrieveContest(contestid)
+
+    args["contest"] = curcontest
+
+    return render_template("contest.html", **args)
+
+@app.route('/contest/<contestid>/<problemindex>')
+def contestProblem(contestid, problemindex):
+    refreshCommonArgs()
+    args = commonArgs.copy()
+
+    args["problem"] = retrieveProblem(contestid, problemindex) 
+    
+    return render_template("problem.html", **args)
 
 
 @app.route('/signin', methods=['GET'])
