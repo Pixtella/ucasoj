@@ -49,6 +49,7 @@ testContestProblem = ContestProblem(1,"testProb")
 t2 = ContestProblem(2, name="probB", idx='B')
 testContestTeam = Team(0, "Tester",[])
 testContest = Contest(1, "test Contest", datetime.datetime(2000,1,1), 300, [testContestTeam]*50, [testContestProblem, t2]*7)
+testSubmission = Submision(0, 1, "admin", "Accepted")
 
 
 def upcomingContestsInfo():
@@ -83,3 +84,10 @@ def retrieveProblem(contestid, problemindex):
     """
     
     return testContestProblem
+
+def retrieveSubmission(submissionid):
+    """
+    Find a submission by absolute identity
+    """
+    
+    return testSubmission

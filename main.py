@@ -55,6 +55,14 @@ def contestProblem(contestid, problemindex):
     
     return render_template("problem.html", **args)
 
+@app.route('/submissions/<submissionid>')
+def submissionView(submissionid):
+    refreshCommonArgs()
+    args = commonArgs.copy()
+
+    args["submission"] = retrieveSubmission(submissionid)
+
+    return render_template("submission.html", **args)
 
 @app.route('/signin', methods=['GET'])
 def signin_form():
