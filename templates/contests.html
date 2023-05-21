@@ -37,7 +37,7 @@
         </nav>
     </header>
     <main>
-        <div class="container" style="height: {{height}}">
+        <div class="container" style="min-height: 900px;">
             <div class="row mt-5 pt-5">
                 <div class="col text-center">
                     <h1>Upcoming Contests</h1>
@@ -52,26 +52,19 @@
                                 <th scope="col">Name</th>
                                 <th scope="col">Start</th>
                                 <th scope="col">Length</th>
+                                <th scope="col">Participants</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Round -1</td>
-                                <td>04/01/3202</td>
-                                <td>05:00</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td colspan="2">Larry the Bird</td>
-                                <td>@twitter</td>
-                            </tr>
+                            {% for contest in upcomingContests %}
+                                <tr>
+                                    <th scope="row">{{contest.id}}</th>
+                                    <td><a href="/contest/{{contest.id}}" style="color: deepskyblue;">{{contest.name}}</a></td>
+                                    <td>{{contest.start.strftime('%m/%d/%Y %H:%M')}}</td>
+                                    <td>{{"%02d:%02d"%(contest.length // 60, contest.length % 60)}}</td>
+                                    <td><i class="fas fa-user"></i> x {{contest.participants|length}}</td>
+                                </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>
@@ -90,26 +83,19 @@
                                 <th scope="col">Name</th>
                                 <th scope="col">Start</th>
                                 <th scope="col">Length</th>
+                                <th scope="col">Participants</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Round -1</td>
-                                <td>04/01/3202</td>
-                                <td>05:00</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td colspan="2">Larry the Bird</td>
-                                <td>@twitter</td>
-                            </tr>
+                            {% for contest in historicContests %}
+                                <tr>
+                                    <th scope="row">{{contest.id}}</th>
+                                    <td><a href="/contest/{{contest.id}}" style="color: deepskyblue;">{{contest.name}}</a></td>
+                                    <td>{{contest.start.strftime('%m/%d/%Y %H:%M')}}</td>
+                                    <td>{{"%02d:%02d"%(contest.length // 60, contest.length % 60)}}</td>
+                                    <td><i class="fas fa-user"></i> x {{contest.participants|length}}</td>
+                                </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>

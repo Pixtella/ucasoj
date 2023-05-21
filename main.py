@@ -4,6 +4,8 @@ from flask import request
 
 import datetime
 
+from contests import Contest,upcomingContestsInfo,contestHistoryInfo
+
 commonArgs = {}
 def refreshCommonArgs():
     commonArgs["year"] = datetime.datetime.now().year
@@ -19,7 +21,6 @@ app = Flask(__name__)
 def home():
     refreshCommonArgs()
     args = commonArgs.copy()
-    args["height"] = str(max(1000, 0)) + "px"
     return render_template("home.html", **args)
     # return '<h1>Home</h1>'
 
@@ -27,7 +28,10 @@ def home():
 def contests():
     refreshCommonArgs()
     args = commonArgs.copy()
-    args["height"] = str(max(1000, 0)) + "px"
+    
+    args["upcomingContests"] = upcomingContestsInfo()
+    args["historicContests"] = contestHistoryInfo()
+
     return render_template("contests.html", **args)
 
 
@@ -52,3 +56,5 @@ def login():
     return render_template("loginpage.html")
 if __name__ == '__main__':
     app.run()
+
+    "".format()
