@@ -53,26 +53,36 @@
                     <div class="card">
                         <div class="card-body">
                             <h1 style="text-align: center;"><i class="fas fa-code"></i> Submit</h1>
-                            <div class="form-group pmd-textfield pmd-textfield-outline pmd-textfield-floating-label">
-                                <select id="propeller-select" class="form-control">
-                                    <option value="">Choose a language</option>
-                                    <option value="cpp">C++</option>
-                                    <option value="py3">Python3</option>
-                                    <option value="c">C</option>
-                                    <option value="java">Java</option>
-                                </select>
-                                <br>
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="inputGroupFile01"
-                                        aria-describedby="inputGroupFileAddon01">
-                                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                            {% if status == "View Problem" %}
+                            <form action="#" method="post" enctype="multipart/form-data">
+                                <div class="pmd-textfield pmd-textfield-outline pmd-textfield-floating-label">
+                                    <select id="compiler" class="form-control" name="compiler">
+                                        <option value="">Choose a language</option>
+                                        <option value="cpp">C++</option>
+                                        <option value="py3">Python3</option>
+                                        <option value="c">C</option>
+                                        <option value="java">Java</option>
+                                    </select>
+                                    <br>
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" name="solcode" id="solcode" aria-describedby="solcode">
+                                        <label class="custom-file-label" for="solcode">Choose file</label>
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <div class="d-flex justify-content-around">
+                                        <input type="submit" class="btn aqua-gradient white-text" value="Submit"
+                                            style="align-items: center;">
+                                    </div>
                                 </div>
+                            </form>
+                            {% elif status == "Submission Failed" %}
                                 <br>
+                                <p style="text-align: center;">Submission Failed</p>
+                            {% else %}
                                 <br>
-                                <div class="d-flex justify-content-around">
-                                    <input type="submit" class="btn aqua-gradient white-text" value="Submit" style="align-items: center;">
-                                </div>
-                            </div>
+                                <p style="text-align: center;">Submission Success</p>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

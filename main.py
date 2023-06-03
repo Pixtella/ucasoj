@@ -46,12 +46,30 @@ def contest(contestid):
 
     return render_template("contest.html", **args)
 
-@app.route('/contest/<contestid>/<problemindex>')
+@app.route('/contest/<contestid>/<problemindex>', methods=['GET'])
 def contestProblem(contestid, problemindex):
     refreshCommonArgs()
     args = commonArgs.copy()
 
     args["problem"] = retrieveProblem(contestid, problemindex) 
+    args["status"] = "View Problem"
+
+    return render_template("problem.html", **args)
+
+@app.route('/contest/<contestid>/<problemindex>', methods=['POST'])
+def deliverCode(contestid, problemindex):
+    refreshCommonArgs()
+    args = commonArgs.copy()
+
+    args["problem"] = retrieveProblem(contestid, problemindex) 
+
+    compiler = request.form["compiler"]
+    solcode = request.files['solcode']
+    
+    if not solcode or not compiler:
+        args["status"] = "Submission Failed"
+    else:
+        args["status"] = "Submitted"
     
     return render_template("problem.html", **args)
 
