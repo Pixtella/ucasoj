@@ -1,5 +1,7 @@
 import datetime
 from utils import *
+from database import *
+from main import dbContest, dbSubmission, dbUser, dbProblem
 
 
 class ContestProblem(Problem):
@@ -45,49 +47,18 @@ class Contest:
 
         return "+ 1/1" # '+': Accepted  '-': Rejected    attempts/penalty
 
-testContestProblem = ContestProblem(1,"testProb")
-t2 = ContestProblem(2, name="probB", idx='B')
-testContestTeam = Team(0, "Tester",[])
-testContest = Contest(1, "test Contest", datetime.datetime(2000,1,1), 300, [testContestTeam]*50, [testContestProblem, t2]*7)
-testSubmission = Submision(0, 1, "admin", "Accepted")
+# testContestProblem = ContestProblem(1,"testProb")
+# t2 = ContestProblem(2, name="probB", idx='B')
+# testContestTeam = Team(0, "Tester",[])
+# testContest = Contest(1, "test Contest", datetime.datetime(2000,1,1), 300, [testContestTeam]*50, [testContestProblem, t2]*7)
+# testSubmission = Submision(0, 1, "admin", "Accepted")
 
 
-def upcomingContestsInfo():
-    """
-    Return a list of upcoming contests.
-    """
-
-    
-    return [Contest()]
 
 
-def contestHistoryInfo():
-    """
-    Return a list of historic contests.
-    """
 
 
-    return [Contest()]
 
 
-def retrieveContest(contestid):
-    """
-    Find a contest by id.
-    """
 
 
-    return testContest
-
-def retrieveProblem(contestid, problemindex):
-    """
-    Find a problem by contestid and problem index
-    """
-    
-    return testContestProblem
-
-def retrieveSubmission(submissionid):
-    """
-    Find a submission by absolute identity
-    """
-    
-    return testSubmission

@@ -33,7 +33,21 @@
                     </li>
                 </ul>
             </div>
+            {% if loginStatus == "Not Login"%}
             <a class="link" href="/login"><button class="btn btn-info my-2 my-sm-0">Login</button></a>
+            {% else %}
+            <ul class="navbar-nav ml-md-auto" style="height: auto;">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                        aria-expanded="false">
+                        {{currentUser.name}}
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/logout">Logout</a>
+                    </div>
+                </li>
+            </ul>
+            {% endif %}
         </nav>
     </header>
     <main>
@@ -54,12 +68,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for prob in contest.problems %}
-                                <tr>
-                                    <th scope="row">{{prob.idx}}</th>
-                                    <td><a href="/contest/{{contest.id}}/{{prob.idx}}" style="color: deepskyblue;">{{prob.name}}</a></td>
-                                    <td>{{contest.numberofAccepted(prob)}} / {{contest.numberofAttempts(prob)}}</td>
-                                </tr>
+                            {% for probid in contest.problemids() %}
+                            <tr>
+                                <th scope="row">{{contest.idx(probid)}}</th>
+                                <td><a href="/contest/{{contest.id}}/{{contest.idx(probid)}}"
+                                        style="color: deepskyblue;">{{contest.probname(probid)}}</a></td>
+                                <td>{{contest.numberofAccepted(probid)}} / {{contest.numberofAttempts(probid)}}</td>
+                            </tr>
                             {% endfor %}
                         </tbody>
                     </table>
@@ -79,22 +94,25 @@
                                 <th scope="col">Name</th>
                                 <th scope="col">Solved</th>
                                 <th scope="col">Penalty</th>
-                                {% for prob in contest.problems %}
-                                <th scope="col">{{prob.idx}}</th>
+                                {% for probid in contest.problemids() %}
+                                <th scope="col">{{contest.idx(probid)}}</th>
                                 {% endfor %}
                             </tr>
                         </thead>
                         <tbody>
-                            {% for team in contest.participants %}
-                                <tr>
-                                    <th scope="row">{{loop.index}}</th>
-                                    <td>{{team.name}}</td>
-                                    <td>{{contest.solved(team)}}</td>
-                                    <td>{{contest.penalty(name)}}</td>
-                                    {% for prob in contest.problems %}
-                                        <td>{{contest.status(team, prob)}}</td>
-                                    {% endfor %}
-                                </tr>
+
+
+                            {% for entry in contest.ranklist() %}
+                            <tr>
+                                <th scope="row">{{loop.index}}</th>
+                                <td>{{entry[1]}}</td>
+                                <td>{{entry[2]}}</td>
+                                <td>{{entry[3]}}</td>
+                                {% for probid in contest.problemids() %}
+                                <td>{{contest.status(entry[0], probid)}}</td>
+                                {% endfor %}
+                            </tr>
+
                             {% endfor %}
                         </tbody>
                     </table>

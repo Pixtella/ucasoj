@@ -33,15 +33,29 @@
                     </li>
                 </ul>
             </div>
+            {% if loginStatus == "Not Login"%}
             <a class="link" href="/login"><button class="btn btn-info my-2 my-sm-0">Login</button></a>
+            {% else %}
+            <ul class="navbar-nav ml-md-auto" style="height: auto;">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                        aria-expanded="false">
+                        {{currentUser.name}}
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/logout">Logout</a>
+                    </div>
+                </li>
+            </ul>
+            {% endif %}
         </nav>
     </header>
     <main>
-        
-        <div class="container" style="min-height: 900px;">
+
+        <div class="container" style="min-height: 100vh;">
             <div class="row mt-5 pt-5">
                 <div class="col text-center">
-                    
+
                 </div>
             </div>
         </div>
@@ -64,7 +78,7 @@
             <!--Grid column-->
             <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
                 © {{year}} Copyright:
-                <a class="text-white" >UCAS-ACM Team</a>
+                <a class="text-white">UCAS-ACM Team</a>
             </div>
             <!--Grid column-->
 
@@ -76,7 +90,8 @@
 
             <!--Grid column-->
             <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                <a class="btn-floating " href="https://github.com/UCAS-ACM" role="button"><i class="fab fa-github fa-lg white-text ml-auto"></i></a>
+                <a class="btn-floating " href="https://github.com/UCAS-ACM" role="button"><i
+                        class="fab fa-github fa-lg white-text ml-auto"></i></a>
             </div>
             <!--Grid column-->
         </div>

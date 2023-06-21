@@ -33,11 +33,25 @@
                     </li>
                 </ul>
             </div>
+            {% if loginStatus == "Not Login"%}
             <a class="link" href="/login"><button class="btn btn-info my-2 my-sm-0">Login</button></a>
+            {% else %}
+            <ul class="navbar-nav ml-md-auto" style="height: auto;">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                        aria-expanded="false">
+                        {{currentUser.name}}
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/logout">Logout</a>
+                    </div>
+                </li>
+            </ul>
+            {% endif %}
         </nav>
     </header>
     <main>
-        <div class="container" style="min-height: 900px;">
+        <div class="container" style="min-height: 100vh;">
             <div class="row mt-5 pt-5">
                 <div class="col text-center">
                     <h1>Upcoming Contests</h1>
@@ -57,13 +71,14 @@
                         </thead>
                         <tbody>
                             {% for contest in upcomingContests %}
-                                <tr>
-                                    <th scope="row">{{contest.id}}</th>
-                                    <td><a href="/contest/{{contest.id}}" style="color: deepskyblue;">{{contest.name}}</a></td>
-                                    <td>{{contest.start.strftime('%m/%d/%Y %H:%M')}}</td>
-                                    <td>{{"%02d:%02d"%(contest.length // 60, contest.length % 60)}}</td>
-                                    <td><i class="fas fa-user"></i> x {{contest.participants|length}}</td>
-                                </tr>
+                            <tr>
+                                <th scope="row">{{contest.id}}</th>
+                                <td><a href="/contest/{{contest.id}}" style="color: deepskyblue;">{{contest.name}}</a>
+                                </td>
+                                <td>{{contest.start.strftime('%m/%d/%Y %H:%M')}}</td>
+                                <td>{{"%02d:%02d"%(contest.length // 60, contest.length % 60)}}</td>
+                                <td><i class="fas fa-user"></i> x {{contest.participants|length}}</td>
+                            </tr>
                             {% endfor %}
                         </tbody>
                     </table>
@@ -88,13 +103,14 @@
                         </thead>
                         <tbody>
                             {% for contest in historicContests %}
-                                <tr>
-                                    <th scope="row">{{contest.id}}</th>
-                                    <td><a href="/contest/{{contest.id}}" style="color: deepskyblue;">{{contest.name}}</a></td>
-                                    <td>{{contest.start.strftime('%m/%d/%Y %H:%M')}}</td>
-                                    <td>{{"%02d:%02d"%(contest.length // 60, contest.length % 60)}}</td>
-                                    <td><i class="fas fa-user"></i> x {{contest.participants|length}}</td>
-                                </tr>
+                            <tr>
+                                <th scope="row">{{contest.id}}</th>
+                                <td><a href="/contest/{{contest.id}}" style="color: deepskyblue;">{{contest.name}}</a>
+                                </td>
+                                <td>{{contest.start.strftime('%m/%d/%Y %H:%M')}}</td>
+                                <td>{{"%02d:%02d"%(contest.length // 60, contest.length % 60)}}</td>
+                                <td><i class="fas fa-user"></i> x {{contest.participants|length}}</td>
+                            </tr>
                             {% endfor %}
                         </tbody>
                     </table>

@@ -33,7 +33,21 @@
                     </li>
                 </ul>
             </div>
+            {% if loginStatus == "Not Login"%}
             <a class="link" href="/login"><button class="btn btn-info my-2 my-sm-0">Login</button></a>
+            {% else %}
+            <ul class="navbar-nav ml-md-auto" style="height: auto;">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                        aria-expanded="false">
+                        {{currentUser.name}}
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/logout">Logout</a>
+                    </div>
+                </li>
+            </ul>
+            {% endif %}
         </nav>
     </header>
     <main>
@@ -43,7 +57,7 @@
                 <div class="col-lg-9">
                     <div class="card">
                         <div class="card-body" style="min-height: 500px;">
-                            <h1 style="text-align: center;">{{problem.idx}}.{{problem.name}} - Problem Statement</h1>
+                            <h1 style="text-align: center;">{{problemidx}}.{{problem.name}} - Problem Statement</h1>
                             <iframe class="frame_style" style="width: 100%; height: 100vh;"
                                 src="/static/plugins/pdfjs/web/viewer.html?file=/static/problems/{{problem.id}}.pdf"></iframe>
                         </div>
@@ -65,7 +79,8 @@
                                     </select>
                                     <br>
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" name="solcode" id="solcode" aria-describedby="solcode">
+                                        <input type="file" class="custom-file-input" name="solcode" id="solcode"
+                                            aria-describedby="solcode">
                                         <label class="custom-file-label" for="solcode">Choose file</label>
                                     </div>
                                     <br>
@@ -77,11 +92,11 @@
                                 </div>
                             </form>
                             {% elif status == "Submission Failed" %}
-                                <br>
-                                <p style="text-align: center;">Submission Failed</p>
+                            <br>
+                            <p style="text-align: center;">Submission Failed</p>
                             {% else %}
-                                <br>
-                                <p style="text-align: center;">Submission Success</p>
+                            <br>
+                            <p style="text-align: center;">Submission Success</p>
                             {% endif %}
                         </div>
                     </div>

@@ -8,41 +8,79 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/css/mdb.min.css">
 
-    
+
 </head>
+
 <body>
     <header>
-        <nav class="navbar blue navbar-dark navbar-expand-md">
+        <nav class="navbar blue navbar-dark fixed-top navbar-expand-md">
             <a class="navbar-brand" href="#">UCAS-OJ</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-              <ul class="navbar-nav">
-                <li class="nav-item active">
-                  <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Problems</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Contests</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link disabled">About Us</a>
-                </li>
-              </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/problems">Problems</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contests">Contests</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="about">About Us</a>
+                    </li>
+                </ul>
             </div>
-            <button class="btn btn-info my-2 my-sm-0" type="submit">Login</button>
+            {% if loginStatus == "Not Login"%}
+            <a class="link" href="/login"><button class="btn btn-info my-2 my-sm-0">Login</button></a>
+            {% else %}
+            <ul class="navbar-nav ml-md-auto" style="height: auto;">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                        aria-expanded="false">
+                        {{currentUser.name}}
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/logout">Logout</a>
+                    </div>
+                </li>
+            </ul>
+            {% endif %}
         </nav>
     </header>
     <main>
-        
+        <br><br>
+        <div class="container" style="min-height: 100vh; width: 500px;">
+            <br>
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 style="text-align: center;"><i class="fas fa-user-circle"></i></h1>
+                        <h1 style="text-align: center;">Login</h1>
+                        <form action="#" method="post" enctype="multipart/form-data">
+                            <div class="pmd-textfield pmd-textfield-outline pmd-textfield-floating-label">
+                                <input type="text" name="usrn" class="form-control mb-4" placeholder="Username">
+                                <input type="password" name="pasw" class="form-control mb-4" placeholder="Password">
+                                <div class="d-flex justify-content-around">
+                                    <input type="submit" class="btn aqua-gradient white-text" value="Sign in"
+                                        style="align-items: center;">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js">
     </script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js">
-    </script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js">
+        </script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/js/mdb.min.js">
     </script>
 </body>

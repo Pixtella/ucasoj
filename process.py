@@ -36,10 +36,10 @@ def submit(userid:int,problemid:int,code:str,compiler:Compiler):
 	# TODO:generate runid
 	runid=userid*1000000+userid.submitted
 	# add to database
-	submission=Submission(runid,userid,problemid,compiler=compiler,code=code,submissiontime=submissiontime)
-	user=User.query.get(userid)
+	submission=dbSubmission(runid,userid,problemid,compiler=compiler,code=code,submissiontime=submissiontime)
+	user=dbUser.query.get(userid)
 	user.submitted+=1
-	problem=Problem.query.get(problemid)
+	problem=dbProblem.query.get(problemid)
 	problem.submitted+=1
 	submission.result=SubmissionResult.COMPILING
 	db.session.add(submission)
@@ -48,8 +48,8 @@ def submit(userid:int,problemid:int,code:str,compiler:Compiler):
 	addjudge(runid,problemid,compiler,code)
 
 def updatecompile(runid:int,compilesucceed:bool,compilemsg:str):
-	submission=Submission.query.get(runid)
-	user = User.query.get(submission.user)
+	submission=dbSubmission.query.get(runid)
+	user = dbUser.query.get(submission.user)
 	if compilesucceed:
 		submission.result=SubmissionResult.RUNNING
 		if user.problmestatus[submission.problem]!='A':
@@ -62,9 +62,9 @@ def updatecompile(runid:int,compilesucceed:bool,compilemsg:str):
 	db.session.commit()
 
 def updatejudge(runid:int,result:SubmissionResult,time:int,memory:int):
-	submission=Submission.query.get(runid)
-	user=User.query.get(submission.user)
-	problem=Problem.query.get(submission.problem)
+	submission=dbSubmission.query.get(runid)
+	user=dbUser.query.get(submission.user)
+	problem=dbProblem.query.get(submission.problem)
 	submission.result=result.value
 	submission.time=time
 	submission.memory=memory
@@ -83,7 +83,7 @@ def updatejudge(runid:int,result:SubmissionResult,time:int,memory:int):
 
 
 def generaterank()->list[tuple[str,int,int,list[(int,int,int)]]]:
-	users=User.query.all()
+	users=dbUser.query.all()
 	users.sort(key=lambda x:(x.solved,-x.penalty))
 	return users
 

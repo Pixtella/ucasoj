@@ -13,11 +13,12 @@ class Team:
 
 class Problem:
 
-    def __init__(self, id=0, name="", timeLimit=1, memoryLimit=256):
+    def __init__(self, id=0, name="", timeLimit=1000, memoryLimit=256, pdfpath=""):
         self.id = id
         self.timeLimit = timeLimit
         self.memoryLimit = memoryLimit
         self.name = name
+        self.pdfpath = pdfpath
 
 class Submision:
     def __init__(self, runid=0, problem=0, user=None, result=None):
