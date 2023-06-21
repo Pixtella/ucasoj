@@ -20,7 +20,7 @@ class Problem:
         self.name = name
 
 class Submision:
-    def __init__(self, runid=0, problem=0, exec_time=0, exec_mem=0, language=None, user=None, result=None):
+    def __init__(self, runid=0, problem=0, exec_time=0, exec_mem=0, language=None, user=None, result=None, code=None):
         self.runid = runid
         self.problem = problem
         self.exec_time = exec_time
@@ -28,3 +28,4 @@ class Submision:
         self.language = language
         self.user = user
         self.result = result
+        self.code = code

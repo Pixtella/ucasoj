@@ -49,7 +49,7 @@ testContestProblem = ContestProblem(1,"testProb")
 t2 = ContestProblem(2, name="probB", idx='B')
 testContestTeam = Team(0, "Tester",[])
 testContest = Contest(1, "test Contest", datetime.datetime(2000,1,1), 300, [testContestTeam]*50, [testContestProblem, t2]*7)
-testSubmission = Submision(0, 1, 123, 4567, "C", "admin", "Accepted")
+testSubmission = Submision(0, 1, 123, 4567, "C", "admin", "Accepted", "#include <stdio.h>\n#include <string.h>\nint main(){\n    scanf(\"%s%s\",s,t);\n}")
 
 
 def upcomingContestsInfo():
