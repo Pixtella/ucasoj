@@ -72,41 +72,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-12">
-                <div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
-                    <pre>
-                        <code class="language-c">#include &lt;stdio.h&gt;
-#include &lt;string.h&gt;
-char s[205],t[205];
-int n,m,a[205],b[205];
-int main(){
-    scanf("%s%s",s,t);
-    n=strlen(s),m=strlen(t);
-    for (int i=1;i<=n;++i) a[i]=s[n-i]-'0';
-    for (int i=1;i<=m;++i) b[i]=t[m-i]-'0';
-    if (m>n) n=m;
-    for (int i=1;i<=n;++i) a[i+1]+=(a[i]+=b[i])/10,a[i]%=10;
-    if (a[n+1]) ++n;
-    for (int i=n;i;--i) putchar(a[i]+'0');
-    puts("");
-    return 0;
-}</code>
-                    </pre>
-                </div>
-            </div>
         </div>
     </main>
-    <script src="../static/js/highlight.min.js"></script>
-    <script src="https://cdn.bootcdn.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
-    <script type="text/javascript">
-      hljs.initHighlightingOnLoad();
-      hljs.initLineNumbersOnLoad();
-      $(document).ready(function () {
-        $("code.hljs").each(function (i, block) {
-          hljs.lineNumbersBlock(block);
-        });
-      });
-    </script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js">
     </script>
     <script type="text/javascript"
